@@ -8,6 +8,8 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
+    "LOG_CHANNEL": "stderr",
+    "LOG_LEVEL": "error",
     "SESSION_DRIVER": "cookie",
     "CACHE_STORE": "array",
     "QUEUE_CONNECTION": "sync"
