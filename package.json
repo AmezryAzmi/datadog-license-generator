@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "echo 'No npm build required for this MVP.'"
+  }
+}

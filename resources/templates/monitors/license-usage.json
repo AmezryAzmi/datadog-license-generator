@@ -1,0 +1,19 @@
+{
+  "name": "[LICENSE] {{license_name}} License Monitoring",
+  "type": "query alert",
+  "query": "{{monitor_query}} > {{critical_value}}",
+  "message": "{{license_name}} license is breach at {{value}}\nMax {{license_name}} license is {{threshold}}",
+  "tags": [],
+  "options": {
+    "thresholds": {
+      "critical": {{critical_value}}
+    },
+    "notify_audit": false,
+    "on_missing_data": "default",
+    "include_tags": false,
+    "new_host_delay": 300
+  },
+  "priority": null,
+  "draft_status": "draft",
+  "assets": []
+}

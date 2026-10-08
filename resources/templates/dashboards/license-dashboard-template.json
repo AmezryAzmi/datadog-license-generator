@@ -1,0 +1,2130 @@
+{
+  "title": "Dashboard License Usage",
+  "description": "## Description\nThis dashboard aims to provide a high-level overview of getting started with estimated usage.\n\nClone this dashboard and edit to match your organization's product usage by adding or removing product sections for a complete overview. \n\nSee [documentation](https://docs.datadoghq.com/account_management/billing/usage_metrics/#types-of-usage) to learn more about estimated usage metrics. \n\nView your organization's actual usage on the [Plan and Usage page.](https://app.datadoghq.com/billing/usage?data_source=billable&summary_month=2024-01&trends_start_date=2024-01-01&trends_time_frame=monthly) (cloned)",
+  "widgets": [
+    {
+      "id": 3700062036907610,
+      "definition": {
+        "title": "Estimated Usage Summary",
+        "background_color": "vivid_purple",
+        "show_title": true,
+        "type": "group",
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 8000354488851480,
+            "definition": {
+              "title": "Estimated Infra Host Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 37,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 37,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 6733428502258016,
+            "definition": {
+              "title": "Estimated Container Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "container"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.containers{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 780,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 800,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 820,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 4,
+              "y": 0,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 4103348238029368,
+            "definition": {
+              "title": "Estimated APM Host Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm_hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "max"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 35,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 35,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 8,
+              "y": 0,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 7732885365166016,
+            "definition": {
+              "title": "Estimated Indexed Spans Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "span"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm.indexed_spans{}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 600000000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 650000000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 700000000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 6442265749133580,
+            "definition": {
+              "title": "Estimated Ingested Spans Count",
+              "title_size": "16",
+              "title_align": "left",
+              "type": "query_value",
+              "requests": [
+                {
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "name": "query1",
+                      "data_source": "metrics",
+                      "query": "sum:datadog.estimated_usage.apm.ingested_bytes{}.as_count()",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "byte_in_decimal_bytes_family"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 40000000000000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 48000000000000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 52500000000000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 4,
+              "y": 2,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 4025355547279158,
+            "definition": {
+              "title": "Estimated RUM Sessions Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Sessions"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.rum.sessions{ sku:replay}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 63000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 68000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 72000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 8,
+              "y": 2,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 7376741881431393,
+            "definition": {
+              "title": "Estimated RUM Sessions Replay Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Sessions"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:estimated_session_replay_usage{*}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 190000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 200000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 200000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 4,
+              "y": 4,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 2392389939814358,
+            "definition": {
+              "title": "NPM",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 37,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 37,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 8,
+              "y": 4,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 681417857388731,
+            "definition": {
+              "title": "APM Host Profile License Remaining",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "host"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.profiling.hosts{}",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 35,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 35,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 6,
+              "height": 2
+            }
+          },
+          {
+            "id": 7989952222675403,
+            "definition": {
+              "title": "APM Container Profile License Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "host"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.profiling.containers{}",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 140,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 140,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 6,
+              "y": 6,
+              "width": 6,
+              "height": 2
+            }
+          },
+          {
+            "id": 396927851126963,
+            "definition": {
+              "type": "note",
+              "content": "#  OMO & OCI LICENSE INFORMATION\n- Infra Host: 37 Host \n- Container: 820 Container (Allotment 10 Container per 1 Infra Host + add on 646 Container -> 10*22 + 646 = 866 Container)\n- APM Host: 35 Host\n- APM Profile Host: 35 Host (Allotment 1 Host per 1 APM Host -> 1*35 = 35 Host)\n- APM Profile Container: 140 Container (Allotment 4 Container per 1 APM Host -> 4*35 = 140 Container)\n- Ingested Span: 16.800 GB (Allotment 150 GB per 1 APM Host + add on 13.500 GB -> 150*22 + 13.500 = 16.800 GB)\n- Indexed Span: 562 M Span (Allotment 1 M Span per 1 APM Host + add on 540 M Span -> 1*22 + 540 = 562 M Span)\n- RUM Session: 72 K Session\n- RUM Session Replay: 72 K Session\n\n# ",
+              "background_color": "white",
+              "font_size": "16",
+              "text_align": "left",
+              "vertical_align": "top",
+              "show_tick": false,
+              "tick_pos": "50%",
+              "tick_edge": "left",
+              "has_padding": true
+            },
+            "layout": {
+              "x": 0,
+              "y": 8,
+              "width": 12,
+              "height": 4
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 13
+      }
+    },
+    {
+      "id": 5941254054848526,
+      "definition": {
+        "title": "Digital Experience (RUM and Synthetic) License Usage",
+        "background_color": "vivid_blue",
+        "show_title": true,
+        "type": "group",
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 211260383580661,
+            "definition": {
+              "title": "Estimated RUM Sessions Count",
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Sessions"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.rum.sessions{}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 63000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 68000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 72000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 3668985643717780,
+            "definition": {
+              "title": "RUM Sessions Count Over Time",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": true,
+              "legend_layout": "horizontal",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "RUM Sessions",
+                      "formula": "query1"
+                    },
+                    {
+                      "alias": "RUM Sessions Cummulative",
+                      "formula": "cumsum(query2)"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.rum.sessions{}.as_count()"
+                    },
+                    {
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "query": "sum:datadog.estimated_usage.rum.sessions{}.as_count()"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "style": {
+                    "palette": "blue",
+                    "color_order": "shuffled",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 2146000",
+                  "value": "y = 2146000",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 4,
+              "y": 0,
+              "width": 8,
+              "height": 2
+            }
+          },
+          {
+            "id": 8004941990559705,
+            "definition": {
+              "title": "Estimated RUM Sessions Replay Count",
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Sessions"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.rum.sessions{sku:replay}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 63000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 68000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 72000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 553687546777932,
+            "definition": {
+              "title": "RUM Sessions Count Over Time",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": true,
+              "legend_layout": "horizontal",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "alias": "RUM Sessions",
+                      "formula": "query1"
+                    },
+                    {
+                      "alias": "RUM Sessions Cummulative",
+                      "formula": "cumsum(query2)"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.rum.sessions{sku:replay}.as_count()"
+                    },
+                    {
+                      "data_source": "metrics",
+                      "name": "query2",
+                      "query": "sum:datadog.estimated_usage.rum.sessions{sku:replay}.as_count()"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "style": {
+                    "palette": "blue",
+                    "color_order": "shuffled",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 200000",
+                  "value": "y = 200000",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 4,
+              "y": 2,
+              "width": 8,
+              "height": 2
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 13,
+        "width": 12,
+        "height": 5
+      }
+    },
+    {
+      "id": 3538393423438990,
+      "definition": {
+        "title": "Infrastructure License Usage",
+        "background_color": "orange",
+        "show_title": true,
+        "type": "group",
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 8201407916616365,
+            "definition": {
+              "title": "Estimated Infra Host Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "avg"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 37,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 37,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 3943915106225993,
+            "definition": {
+              "title": "Estimated Infra Host Count",
+              "type": "toplist",
+              "requests": [
+                {
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{} by {host_type}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "max"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "sort": {
+                    "count": 10,
+                    "order_by": [
+                      {
+                        "type": "formula",
+                        "index": 0,
+                        "order": "desc"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "style": {
+                "display": {
+                  "type": "stacked",
+                  "legend": "automatic"
+                }
+              }
+            },
+            "layout": {
+              "x": 3,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 3417238087874396,
+            "definition": {
+              "title": "Current Month Estimated Host Count vs. Prior Month Count",
+              "show_legend": false,
+              "legend_layout": "horizontal",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "warm",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 22",
+                  "value": "y = 22",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 6,
+              "y": 0,
+              "width": 6,
+              "height": 2
+            }
+          },
+          {
+            "id": 311061126591869,
+            "definition": {
+              "title": "Estimated Container Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "container"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.containers{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 780,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 800,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 820,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 4,
+              "height": 2
+            }
+          },
+          {
+            "id": 7042294302841701,
+            "definition": {
+              "title": "Current Month Estimated NPM Count vs. Prior Month Count",
+              "show_legend": false,
+              "legend_layout": "horizontal",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.npm.host_instance{*}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "warm",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.npm.host_instance{*}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 866",
+                  "value": "y = 866",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 4,
+              "y": 2,
+              "width": 8,
+              "height": 2
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 36,
+        "width": 12,
+        "height": 5,
+        "is_column_break": true
+      }
+    },
+    {
+      "id": 4176953029904034,
+      "definition": {
+        "title": "Application and Database License Usage",
+        "background_color": "blue",
+        "show_title": true,
+        "type": "group",
+        "layout_type": "ordered",
+        "widgets": [
+          {
+            "id": 4577650088632237,
+            "definition": {
+              "title": "Estimated APM Host Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm_hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "max"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 35,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 35,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 0,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 5829056244105866,
+            "definition": {
+              "title": "Current Month Estimated APM Host Count vs. Prior Month Count",
+              "show_legend": false,
+              "legend_layout": "vertical",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "on_right_yaxis": false,
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm_hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "red",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm_hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 22",
+                  "value": "y = 22",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 0,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 5122212910656666,
+            "definition": {
+              "title": "APM Profile Host License Remaining",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "host"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.profiling.hosts{}",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 35,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 35,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 2,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 5985020923344648,
+            "definition": {
+              "title": "Current Month Estimated APM Profile Host Count vs. Prior Month Count",
+              "show_legend": false,
+              "legend_layout": "vertical",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "on_right_yaxis": false,
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.profiling.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "red",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.profiling.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 22",
+                  "value": "y = 22",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 2,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 801759330552124,
+            "definition": {
+              "title": "APM Profile Container License Count",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "host"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "query": "sum:datadog.estimated_usage.profiling.containers{}",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 140,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 140,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 4,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 5049532764061877,
+            "definition": {
+              "title": "Current Month Estimated APM Profile Container Count vs. Prior Month Count",
+              "show_legend": false,
+              "legend_layout": "vertical",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "on_right_yaxis": false,
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.profiling.containers{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "red",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.profiling.containers{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 88",
+                  "value": "y = 88",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 4,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 3328305434510156,
+            "definition": {
+              "title": "Estimated Ingested Spans Count",
+              "title_size": "16",
+              "title_align": "left",
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "query_value",
+              "requests": [
+                {
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "name": "query1",
+                      "data_source": "metrics",
+                      "query": "sum:datadog.estimated_usage.apm.ingested_bytes{}.as_count()",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "byte_in_decimal_bytes_family"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 40000000000000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 48000000000000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 52500000000000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 6,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 1390116612704601,
+            "definition": {
+              "title": "Estimated Ingested Spans Count",
+              "title_size": "16",
+              "title_align": "left",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit"
+                        }
+                      },
+                      "formula": "query1"
+                    },
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit"
+                        }
+                      },
+                      "formula": "cumsum(query2)"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "name": "query1",
+                      "data_source": "metrics",
+                      "query": "sum:datadog.estimated_usage.apm.ingested_bytes{}.as_count()"
+                    },
+                    {
+                      "name": "query2",
+                      "data_source": "metrics",
+                      "query": "sum:datadog.estimated_usage.apm.ingested_bytes{}.as_count()"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "style": {
+                    "palette": "dog_classic",
+                    "order_by": "values",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "markers": [
+                {
+                  "label": "y = 16800000000000",
+                  "value": "y = 16800000000000",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 6,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 959722615220571,
+            "definition": {
+              "title": "Estimated Indexed Spans Count",
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "span"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm.indexed_spans{}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "sum"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 600000000,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": "<=",
+                      "value": 650000000,
+                      "palette": "white_on_yellow"
+                    },
+                    {
+                      "comparator": ">",
+                      "value": 700000000,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 8,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 8897852954150384,
+            "definition": {
+              "title": "Estimated Indexed Spans Count",
+              "show_legend": true,
+              "legend_layout": "auto",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "time": {
+                "type": "monthly",
+                "offset": 0
+              },
+              "type": "timeseries",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit"
+                        }
+                      },
+                      "formula": "query1"
+                    },
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit"
+                        }
+                      },
+                      "formula": "cumsum(query2)"
+                    }
+                  ],
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.apm.indexed_spans{}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    },
+                    {
+                      "query": "sum:datadog.estimated_usage.apm.indexed_spans{}.as_count()",
+                      "data_source": "metrics",
+                      "name": "query2"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "style": {
+                    "palette": "dog_classic",
+                    "order_by": "values",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "markers": [
+                {
+                  "label": "y = 562000000",
+                  "value": "y = 562000000",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 8,
+              "width": 9,
+              "height": 2
+            }
+          },
+          {
+            "id": 3302563057718042,
+            "definition": {
+              "title": "Database Host",
+              "type": "query_value",
+              "requests": [
+                {
+                  "formulas": [
+                    {
+                      "number_format": {
+                        "unit": {
+                          "type": "custom_unit_label",
+                          "label": "Hosts"
+                        }
+                      },
+                      "formula": "query1"
+                    }
+                  ],
+                  "response_format": "scalar",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.dbm.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1",
+                      "aggregator": "last"
+                    }
+                  ],
+                  "conditional_formats": [
+                    {
+                      "comparator": "<=",
+                      "value": 2,
+                      "palette": "white_on_green"
+                    },
+                    {
+                      "comparator": ">=",
+                      "value": 2,
+                      "palette": "white_on_red"
+                    }
+                  ]
+                }
+              ],
+              "autoscale": true,
+              "text_align": "center",
+              "precision": 2,
+              "timeseries_background": {
+                "yaxis": {},
+                "type": "bars"
+              }
+            },
+            "layout": {
+              "x": 0,
+              "y": 10,
+              "width": 3,
+              "height": 2
+            }
+          },
+          {
+            "id": 3838903302825319,
+            "definition": {
+              "title": "Current Month Estimated DBM Host Count vs. DBM Month Count",
+              "show_legend": false,
+              "legend_layout": "vertical",
+              "legend_columns": [
+                "avg",
+                "min",
+                "max",
+                "value",
+                "sum"
+              ],
+              "type": "timeseries",
+              "requests": [
+                {
+                  "on_right_yaxis": false,
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.dbm.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "formulas": [
+                    {
+                      "formula": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "red",
+                    "line_type": "solid",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                },
+                {
+                  "on_right_yaxis": false,
+                  "formulas": [
+                    {
+                      "formula": "calendar_shift(query1, '-4w', 'UTC')"
+                    }
+                  ],
+                  "response_format": "timeseries",
+                  "queries": [
+                    {
+                      "query": "sum:datadog.estimated_usage.dbm.hosts{}",
+                      "data_source": "metrics",
+                      "name": "query1"
+                    }
+                  ],
+                  "style": {
+                    "palette": "green",
+                    "color_order": "shuffled",
+                    "line_type": "dashed",
+                    "line_width": "normal"
+                  },
+                  "display_type": "line"
+                }
+              ],
+              "yaxis": {
+                "include_zero": true,
+                "scale": "linear",
+                "label": "",
+                "min": "auto",
+                "max": "auto"
+              },
+              "markers": [
+                {
+                  "label": "y = 22",
+                  "value": "y = 22",
+                  "display_type": "error bold"
+                }
+              ]
+            },
+            "layout": {
+              "x": 3,
+              "y": 10,
+              "width": 9,
+              "height": 2
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 41,
+        "width": 12,
+        "height": 13
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "pause_auto_refresh": false,
+  "reflow_type": "fixed"
+}

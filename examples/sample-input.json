@@ -1,0 +1,21 @@
+{
+  "infra_host": 10,
+  "infra_plan": "enterprise",
+  "container_addon": 3,
+  "cnm": 10,
+  "ndm": 5,
+  "apm_host": 10,
+  "apm_plan": "enterprise",
+  "apm_ingested_addon_gb": 5,
+  "apm_indexed_addon_million": 2,
+  "dbm_host": 4,
+  "rum_mode": "without_limit",
+  "rum_investigate": 100000,
+  "rum_measure": 200000,
+  "rum_session_replay": 50000,
+  "synthetic_api": 10000,
+  "synthetic_browser": 5000,
+  "logs_ingested": 100,
+  "logs_indexed": 1000000,
+  "cloud_siem": 250000
+}
