@@ -27,6 +27,10 @@
     }
   },
   "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi"
+    ],
     "setup": [
       "php artisan key:generate --ansi"
     ],

@@ -47,6 +47,18 @@ php artisan serve --host=0.0.0.0 --port=8000
 
 Open `http://127.0.0.1:8000` or use your VM port-forwarding address.
 
+## Deploy to Vercel
+
+This project uses the community-maintained [`vercel-php` runtime](https://github.com/vercel-community/php) to run Laravel as a Vercel Function.
+
+1. Import this GitHub repository into Vercel and keep the project root set to the repository root.
+2. Add these Environment Variables in the Vercel project settings:
+   - `APP_KEY` set to a stable key generated with `php artisan key:generate --show`.
+   - `APP_URL` set to the production deployment URL.
+3. Deploy. Vercel reads `vercel.json`, installs Composer dependencies, and routes application requests through `api/index.php`.
+
+`vercel.json` sets production mode, cookie-backed sessions, in-memory cache, and synchronous queues. Cookie sessions avoid depending on persistent storage between serverless invocations. Laravel's writable runtime storage is redirected to the function's temporary directory, so anything written there is ephemeral. Do not commit `.env` or place secrets in the repository; `.env.example` contains only placeholders.
+
 ## Recent dashboard/output behavior
 
 - Estimated Usage Summary widgets are ordered as: Infra Host, Container, CNM, NDM, Custom Metrics, Custom Events, APM Host, APM Ingested Spans, APM Indexed Spans, APM Profiler Host, APM Profiler Container, DBM Host, RUM Session, RUM Measure, RUM Investigate, RUM Session Replay, Logs Ingested, Logs Indexed, Cloud SIEM, Synthetic API Test, Synthetic Browser Test.
