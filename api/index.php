@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 
 require __DIR__.'/../vendor/autoload.php';
 
-$storagePath = sys_get_temp_dir().'/datadog-license-generator';
+$runtimePath = sys_get_temp_dir().'/datadog-license-generator';
+$cachePath = $runtimePath.'/bootstrap/cache';
 $storageDirectories = [
+    'bootstrap/cache',
     'app/private',
     'app/public',
     'framework/cache/data',
@@ -15,15 +17,24 @@ $storageDirectories = [
 ];
 
 foreach ($storageDirectories as $directory) {
-    $path = $storagePath.'/'.$directory;
+    $path = $runtimePath.'/'.$directory;
 
     if (! is_dir($path) && ! mkdir($path, 0775, true) && ! is_dir($path)) {
-        throw new RuntimeException("Unable to create temporary storage directory: {$path}");
+        throw new RuntimeException("Unable to create temporary runtime directory: {$path}");
     }
 }
 
+foreach ([
+    'APP_PACKAGES_CACHE' => $cachePath.'/packages.php',
+    'APP_SERVICES_CACHE' => $cachePath.'/services.php',
+] as $name => $value) {
+    putenv($name.'='.$value);
+    $_ENV[$name] = $value;
+    $_SERVER[$name] = $value;
+}
+
 $app = require __DIR__.'/../bootstrap/app.php';
-$app->useStoragePath($storagePath);
+$app->useStoragePath($runtimePath);
 $app->register(\Illuminate\Filesystem\FilesystemServiceProvider::class);
 $app->register(\Illuminate\Translation\TranslationServiceProvider::class);
 $app->register(\Illuminate\View\ViewServiceProvider::class);
