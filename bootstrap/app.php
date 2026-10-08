@@ -16,11 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         // The application intentionally does not persist submitted customer data.
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->report(function (Throwable $exception): void {
+        $exceptions->render(function (Throwable $exception) {
             error_log(sprintf(
-                'Laravel exception [%s]: %s',
+                'Laravel render exception [%s]: %s',
                 $exception::class,
                 $exception->getMessage(),
             ));
+
+            return null;
         });
     })->create();
