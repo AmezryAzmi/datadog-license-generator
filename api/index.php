@@ -24,5 +24,4 @@ foreach ($storageDirectories as $directory) {
 
 $app = require __DIR__.'/../bootstrap/app.php';
 $app->useStoragePath($storagePath);
-$app->register(\Illuminate\View\ViewServiceProvider::class);
 $app->handleRequest(Request::capture());
